@@ -1,0 +1,4 @@
+Car Payment 500.00
+Groceries 200.00
+Subscriptions 15.99
+Clothes 63.15
