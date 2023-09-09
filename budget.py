@@ -36,6 +36,7 @@ class budget:
 
             print(f"{self.expense_names[i]}: ${str_amount}")
 
+        self.total_expense_amount = round(self.total_expense_amount, 2)
         print(f"Total expenses: ${self.total_expense_amount}")
 
 
