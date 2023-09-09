@@ -17,10 +17,11 @@ class budget:
             print("Non-numerical values are not valid.")
 
     def add_expense(self, name, amount):
-        self.expense_names =+ [name]
-        self.expense_amounts =+ [amount]
-        self.total_expense_amount =+ amount
-        self.expense_count =+ 1
+        self.expense_names += [name]
+        self.expense_amounts += [amount]
+        self.total_expense_amount += amount
+        self.expense_count += 1
+
 
     def print_expenses(self):
         print(self.first_name, self.last_name)
@@ -28,9 +29,14 @@ class budget:
         print("-"*(total_len + 1)) #add 1 to length so the dash bar length matches the length of first and last name
 
         for i in range(self.expense_count):
-            print(f"{self.expense_names[i]}:${self.expense_amounts[i]}")
+            str_amount = str(self.expense_amounts[i])
+            second_to_last = len(str_amount) - 2
+            if str_amount[second_to_last] == '.': #if the second to last index is a decimal then append a 0
+                str_amount += '0'
 
-        print("Total expenses: ",self.total_expense_amount)
+            print(f"{self.expense_names[i]}: ${str_amount}")
+
+        print(f"Total expenses: ${self.total_expense_amount}")
 
 
 

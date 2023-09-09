@@ -1,4 +1,5 @@
-Car Payment 500.00
-Groceries 200.00
-Subscriptions 15.99
-Clothes 63.15
+Car_Payment 500.00
+Groceries 150.91
+Subscriptions 2.00
+Insurance 300.00
+Food 160.00
