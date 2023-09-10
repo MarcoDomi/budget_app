@@ -18,6 +18,8 @@ class budget:
 
     def add_expense(self, name, amount):
         self.expense_names += [name]
+
+        amount = float("{:.2f}".format(amount))
         self.expense_amounts += [amount]
         self.total_expense_amount += amount
         self.expense_count += 1
