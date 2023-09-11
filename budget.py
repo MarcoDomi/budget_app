@@ -1,9 +1,8 @@
 
 class budget:
-    monthly_income = 0.0
+    income = 0.0
     expense_count = 0
-    expense_names = []
-    expense_amounts = []
+    expenses = {}
     total_expense_amount = 0.0
     
     def __init__(self, first_name, last_name) -> None:
@@ -11,18 +10,21 @@ class budget:
         self.last_name = last_name
       
         
-    def set_monthly_income(self,value:float) -> None:
+    def set_income(self,value:float) -> None:
         if self.__is_valid_amount(value):
-            self.monthly_income = float(value)
+            self.income = float(value)
         else:
             print("Invalid monthly income")
 
 
     def add_expense(self, name:str, amount:float):
+        name = name.lower()
         if self.__is_valid_amount(amount):
-            self.expense_names += [name]
-            self.expense_amounts += [amount]
-            self.total_expense_amount += amount
+            if name in self.expenses:
+                self.expenses[name] += float(amount)
+            else:
+                self.expenses[name] = float(amount)
+            self.total_expense_amount += float(amount)
             self.expense_count += 1
         else:
             print("Invalid expense amount.")
@@ -30,18 +32,22 @@ class budget:
 
     def print_expenses(self):
         print(self.first_name, self.last_name)
-        str_monthly_income = self.__append_zero(str(self.monthly_income))
-        print(f"Monthly Income: ${str_monthly_income}")
+        str_income = self.__append_zero(str(self.income))
+        print(f"Monthly Income: ${str_income}")
 
-        total_len = len(self.first_name) + len(self.last_name)
-        print("-"*(total_len + 1)) #add 1 to length so the dash bar length matches the length of first and last name
+        print("-"*(15)) #print dash bar
 
-        for i in range(self.expense_count):
-            str_amount = str(self.expense_amounts[i])
+        for category in self.expenses:
+            str_amount = str(self.expenses[category])
             str_amount = self.__append_zero(str_amount)
-            print(f"{self.expense_names[i]}: ${str_amount}")
-
+            print(f"{category}: -{str_amount}")
         print(f"Total expenses: ${self.total_expense_amount}")
+
+        print("-"*(15))
+
+        remaining_income = self.income - self.total_expense_amount
+        str_remaining_income = self.__truncate_values(remaining_income)
+        print(f"Remaining income: ${str_remaining_income}")
 
 
     def __append_zero(self, str_amount:str):
@@ -62,3 +68,19 @@ class budget:
         after_decimal = decimal_index + 1
 
         return len(str_value[after_decimal:]) <= 2
+    
+
+    def __truncate_values(self, value:float): #NOTE might change to rounding rather than string slicing
+        str_value = str(value)
+        decimal_index = str_value.find('.') 
+        decimal_values = str_value[decimal_index + 1:]
+        if len(decimal_values) > 2:
+            str_value = str_value[:decimal_index+3]
+
+        return str_value
+
+
+
+
+
+
