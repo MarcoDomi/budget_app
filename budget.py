@@ -13,7 +13,7 @@ class budget:
         
     def set_monthly_income(self,value:float) -> None:
         if self.__is_valid_amount(value):
-            self.monthly_income = value
+            self.monthly_income = float(value)
         else:
             print("Invalid monthly income")
 
@@ -56,6 +56,9 @@ class budget:
         str_value = str(value) 
 
         decimal_index = str_value.find('.') 
+        if decimal_index == -1:
+            return True
+        
         after_decimal = decimal_index + 1
 
         return len(str_value[after_decimal:]) <= 2
