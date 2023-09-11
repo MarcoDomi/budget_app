@@ -10,40 +10,51 @@ class budget:
         self.first_name = first_name
         self.last_name = last_name
         
-    def set_monthly_income(self,value) -> None:
-        try:
-            self.monthly_income = float('%.2f'%value)
-        except ValueError:
-            print("Non-numerical values are not valid.")
+    def set_monthly_income(self,value:float) -> None:
+        if self.__is_valid_amount(value):
+            self.monthly_income = value
+        else:
+            print("Invalid monthly income")
 
-    def add_expense(self, name, amount):
-        self.expense_names += [name]
 
-        amount = float("{:.2f}".format(amount))
-        self.expense_amounts += [amount]
-        self.total_expense_amount += amount
-        self.expense_count += 1
+    def add_expense(self, name:str, amount:float):
+        if self.__is_valid_amount(amount):
+            self.expense_names += [name]
+            self.expense_amounts += [amount]
+            self.total_expense_amount += amount
+            self.expense_count += 1
+        else:
+            print("Invalid expense amount.")
 
 
     def print_expenses(self):
         print(self.first_name, self.last_name)
+        str_monthly_income = self.__append_zero(str(self.monthly_income))
+        print(f"Monthly Income: ${str_monthly_income}")
+
         total_len = len(self.first_name) + len(self.last_name)
         print("-"*(total_len + 1)) #add 1 to length so the dash bar length matches the length of first and last name
 
         for i in range(self.expense_count):
             str_amount = str(self.expense_amounts[i])
-            second_to_last = len(str_amount) - 2
-            if str_amount[second_to_last] == '.': #if the second to last index is a decimal then append a 0
-                str_amount += '0'
-
+            str_amount = self.__append_zero(str_amount)
             print(f"{self.expense_names[i]}: ${str_amount}")
 
-        self.total_expense_amount = round(self.total_expense_amount, 2)
         print(f"Total expenses: ${self.total_expense_amount}")
 
 
+    def __append_zero(self, str_amount:str):
+        second_to_last = len(str_amount) - 2
+        if str_amount[second_to_last] == '.': #if the second to last index is a decimal then append a 0
+            str_amount += '0'
+        return str_amount
+        
 
-#b = budget("max","domi")
-#b.set_monthly_income(4.33)
-#b.print_expenses()
+    def __is_valid_amount(self,value:float) -> bool:
+        '''check if a floating point value has no more than 2 values after the decimal point'''
+        str_value = str(value) 
 
+        decimal_index = str_value.find('.') 
+        after_decimal = decimal_index + 1
+
+        return len(str_value[after_decimal:]) <= 2

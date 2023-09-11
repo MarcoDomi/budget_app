@@ -12,4 +12,5 @@ for line in expense_file:
 
 expense_file.close()
 
+my_budget.set_monthly_income(100.93)
 my_budget.print_expenses()
