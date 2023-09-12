@@ -32,7 +32,7 @@ class budget:
 
     def print_expenses(self):
         print(self.first_name, self.last_name)
-        str_income = self.__append_zero(str(self.income))
+        str_income = self.__append_zero(self.income)
         print(f"Monthly Income: ${str_income}")
 
         print("-"*(15)) #print dash bar
@@ -50,7 +50,9 @@ class budget:
         print(f"Remaining income: ${str_remaining_income}")
 
 
-    def __append_zero(self, str_amount:str):
+    def __append_zero(self, amount:float):
+        '''appends a zero to a numerical string if needed'''
+        str_amount = str(amount)
         second_to_last = len(str_amount) - 2
         if str_amount[second_to_last] == '.': #if the second to last index is a decimal then append a 0
             str_amount += '0'
@@ -59,13 +61,8 @@ class budget:
 
     def __is_valid_amount(self,value:float) -> bool:
         '''check if a floating point value has no more than 2 values after the decimal point'''
-        str_value = str(value) 
-
-        decimal_index = str_value.find('.') 
-        if decimal_index == -1:
-            return True
-        
-        after_decimal = decimal_index + 1
+        str_value = str(float(value))
+        after_decimal = str_value.find('.') + 1 #find the index that is after the decimal
 
         return len(str_value[after_decimal:]) <= 2
     
@@ -75,7 +72,7 @@ class budget:
         decimal_index = str_value.find('.') 
         decimal_values = str_value[decimal_index + 1:]
         if len(decimal_values) > 2:
-            str_value = str_value[:decimal_index+3]
+            str_value = str_value[:decimal_index + 3]
 
         return str_value
 
