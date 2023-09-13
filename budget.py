@@ -32,18 +32,18 @@ class budget:
 
     def print_expenses(self):
         print(self.first_name, self.last_name)
+
+        print("-"*(15)) #print dash bar
         str_income = self.__append_zero(self.income)
         print(f"Monthly Income: ${str_income}")
 
-        print("-"*(15)) #print dash bar
-
         for category in self.expenses:
             str_amount = self.__append_zero(self.expenses[category])
-            print(f"{category}: -{str_amount}")
+            print("{:<15}".format(category), '-'+str_amount)
+        print("-"*(15))
+
         str_total_amount = self.__append_zero(self.total_expense_amount)
         print(f"Total expenses: ${str_total_amount}")
-
-        print("-"*(15))
 
         remaining_income = self.income - self.total_expense_amount
         remaining_income = round(remaining_income,2)
