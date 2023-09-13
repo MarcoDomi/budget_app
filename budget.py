@@ -43,7 +43,7 @@ class budget:
         print("-"*(15))
 
         str_total_amount = self.__append_zero(self.total_expense_amount)
-        print(f"Total expenses: ${str_total_amount}")
+        print(f"Total expenses:   ${str_total_amount}")
 
         remaining_income = self.income - self.total_expense_amount
         remaining_income = round(remaining_income,2)
