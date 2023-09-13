@@ -41,12 +41,14 @@ class budget:
             str_amount = str(self.expenses[category])
             str_amount = self.__append_zero(str_amount)
             print(f"{category}: -{str_amount}")
-        print(f"Total expenses: ${self.total_expense_amount}")
+        str_total_amount = self.__append_zero(self.total_expense_amount)
+        print(f"Total expenses: ${str_total_amount}")
 
         print("-"*(15))
 
         remaining_income = self.income - self.total_expense_amount
-        str_remaining_income = self.__truncate_values(remaining_income)
+        remaining_income = round(remaining_income,2)
+        str_remaining_income = self.__append_zero(remaining_income)
         print(f"Remaining income: ${str_remaining_income}")
 
 
@@ -65,19 +67,3 @@ class budget:
         after_decimal = str_value.find('.') + 1 #find the index that is after the decimal
 
         return len(str_value[after_decimal:]) <= 2
-    
-
-    def __truncate_values(self, value:float): #NOTE might change to rounding rather than string slicing
-        str_value = str(value)
-        decimal_index = str_value.find('.') 
-        decimal_values = str_value[decimal_index + 1:]
-        if len(decimal_values) > 2:
-            str_value = str_value[:decimal_index + 3]
-
-        return str_value
-
-
-
-
-
-

@@ -1,5 +1,5 @@
-Car_Payment 500
-Groceries 150
-Subscriptions 2
-Insurance 300
+Car_Payment 500.09
+Groceries 150.91
+Subscriptions 2.90
+Insurance 300.67
 Food 160.00
