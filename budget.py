@@ -38,8 +38,7 @@ class budget:
         print("-"*(15)) #print dash bar
 
         for category in self.expenses:
-            str_amount = str(self.expenses[category])
-            str_amount = self.__append_zero(str_amount)
+            str_amount = self.__append_zero(self.expenses[category])
             print(f"{category}: -{str_amount}")
         str_total_amount = self.__append_zero(self.total_expense_amount)
         print(f"Total expenses: ${str_total_amount}")
